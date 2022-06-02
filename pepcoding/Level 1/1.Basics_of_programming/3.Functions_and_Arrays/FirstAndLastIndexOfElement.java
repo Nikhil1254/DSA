@@ -27,10 +27,10 @@ public class FirstAndLastIndexOfElement {
             int mid = (low+high)/2 ;
             int val = arr[mid] ;
 
-            if(val==tar){
+            if(tar==val){
                 high = mid-1 ;
                 firstIdx = mid ;
-            }else if(val>tar){
+            }else if(tar<val){
                 high = mid-1 ;
             }else
                 low = mid+1 ;

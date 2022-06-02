@@ -16,9 +16,11 @@ public class DigonalTraversal {
     }
 
     public static void digonalTraversal(int[][] arr) {
-
-        for (int i = 0; i < arr.length; i++)
-            for (int j = i; j < arr[0].length; j++)
-                System.out.print(arr[i][i]+" ");
+        int n = arr.length;
+        for(int i=0 ; i<arr[0].length ; i++){
+            
+            for(int r=0,c=i ; r<n && c<n; r++,c++)
+                System.out.print(arr[r][c]+" ");
+        }
     }
 }
