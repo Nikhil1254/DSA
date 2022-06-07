@@ -7,6 +7,7 @@ public class BalanceBrackets {
 
         String str = scn.nextLine();
         System.out.println(solution(str));
+        scn.close();
     }
 
     public static boolean solution(String str) {
