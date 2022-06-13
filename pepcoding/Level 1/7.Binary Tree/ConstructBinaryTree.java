@@ -64,19 +64,20 @@ public class ConstructBinaryTree {
     }
 
     static void display(Node node) {
+        if (node == null)
+            return;
+
         String str = "";
 
-        str += node.left == null ? "." : node.data + "";
+        str += node.left == null ? "." : node.left.data + "";
         str += " <- " + node.data + " -> ";
-        str += node.right == null ? "." : node.data;
+        str += node.right == null ? "." : node.right.data;
 
         System.out.println(str);
 
-        if (node.left != null)
-            display(node.left);
+        display(node.left);
 
-        if (node.right != null)
-            display(node.right);
+        display(node.right);
     }
 
     public static void main(String[] args) {
