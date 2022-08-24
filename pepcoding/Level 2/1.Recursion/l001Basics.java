@@ -615,15 +615,21 @@ public class l001Basics {
     // first try to do it for single jump and modify it to multiple jumps
 
     public static class Pair {
-        String psf;
+        String path;
         int len;
 
         public Pair(String psf, int len) {
-            this.psf = psf;
+            this.path = psf;
             this.len = len;
+        }
+
+        @Override
+        public String toString() {
+            return path + " -> " + len;
         }
     }
 
+    // on the way down approach
     public static Pair longestPath(int sr, int sc, boolean[][] vis, int[][] dir, String[] dirS) {
         int n = vis.length, m = vis[0].length;
 
@@ -645,7 +651,7 @@ public class l001Basics {
                         Pair recAns = longestPath(r, c, vis, dir, dirS);
                         if (recAns.len != -1 && recAns.len + 1 > ans.len) {
                             ans.len = recAns.len + 1;
-                            ans.psf = dirS[d] + jump + recAns.psf;
+                            ans.path = dirS[d] + jump + recAns.path;
                         }
                     }
                 } else
@@ -661,7 +667,7 @@ public class l001Basics {
         int n = vis.length, m = vis[0].length;
 
         if (sr == n - 1 && sc == m - 1) {
-            return new Pair("", 0); // len==0 is mark that we hit base case
+            return new Pair("", 0); // len==0 is mark that we hit base case , this is our answer
         }
 
         vis[sr][sc] = true;
@@ -678,7 +684,7 @@ public class l001Basics {
                         Pair recAns = shortestPath(r, c, vis, dir, dirS);
                         if (recAns.len != (int) 1e9 && recAns.len + 1 < ans.len) {
                             ans.len = recAns.len + 1;
-                            ans.psf = dirS[d] + jump + recAns.psf;
+                            ans.path = dirS[d] + jump + recAns.path;
                         }
                     }
                 } else
@@ -688,6 +694,70 @@ public class l001Basics {
 
         vis[sr][sc] = false;
         return ans;
+    }
+
+    // on the way up approach - easier than first
+    public static int longestPath(int sr, int sc, int[][] mat, int[][] dir, String[] dirS, String psf, int len,
+            Pair lPath) {
+        int n = mat.length, m = mat[0].length;
+        if (sr == n - 1 && sc == m - 1) {
+            if (len > lPath.len) {
+                lPath.len = len;
+                lPath.path = psf;
+            }
+
+            return 1;
+        }
+
+        int count = 0;
+        mat[sr][sc] = 0; // like visited only
+
+        for (int d = 0; d < dir.length; d++) {
+            for (int r = 1; r < Math.max(n, m); r++) {
+                int x = sr + r * dir[d][0];
+                int y = sc + r * dir[d][1];
+
+                if (x >= 0 && y >= 0 && x < n && y < m) {
+                    if (mat[x][y] != 0)
+                        count += longestPath(x, y, mat, dir, dirS, psf + dirS[d] + r, len + 1, lPath);
+                } else
+                    break;
+            }
+        }
+
+        mat[sr][sc] = 1;
+        return count;
+    }
+
+    public static int shortestPath(int sr, int sc, int[][] mat, int[][] dir, String[] dirS, String psf, int len,
+            Pair lPath) {
+        int n = mat.length, m = mat[0].length;
+        if (sr == n - 1 && sc == m - 1) {
+            if (len < lPath.len) {
+                lPath.len = len;
+                lPath.path = psf;
+            }
+
+            return 1;
+        }
+        int count = 0;
+        mat[sr][sc] = 0;
+
+        for (int d = 0; d < dir.length; d++) {
+            for (int r = 1; r < Math.max(n, m); r++) {
+                int x = sr + r * dir[d][0];
+                int y = sc + r * dir[d][1];
+
+                if (x >= 0 && y >= 0 && x < n && y < m) {
+                    if (mat[x][y] != 0)
+                        count += shortestPath(x, y, mat, dir, dirS, psf + dirS[d] + r, len + 1, lPath);
+                } else
+                    break;
+            }
+        }
+
+        mat[sr][sc] = 1;
+        return count;
     }
 
     // ===========================================================================================
@@ -701,10 +771,17 @@ public class l001Basics {
         // vis[1][1] = vis[1][2] = vis[2][0] = true; // blocked cells
 
         Pair ans = longestPath(0, 0, vis, dir, dirS);
-        System.out.println(ans.psf + " @ " + ans.len);
+        System.out.println(ans.path + " @ " + ans.len);
         ans = shortestPath(0, 0, vis, dir, dirS);
-        System.out.println(ans.psf + " @ " + ans.len);
+        System.out.println(ans.path + " @ " + ans.len);
 
+        Pair lPath = new Pair("", Integer.MIN_VALUE);
+        Pair sPath = new Pair("", Integer.MAX_VALUE);
+        int[][] mat = { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } }; // 1-allowed , 0-blocked
+        longestPath(0, 0, mat, dir, dirS, "", 0, lPath);
+        System.out.println("LongestPath : " + lPath);
+        shortestPath(0, 0, mat, dir, dirS, "", 0, sPath);
+        System.out.println("ShortestPath : " + sPath);
     }
 
     public static void mazePath() {

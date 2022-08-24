@@ -1,8 +1,6 @@
-import java.lang.reflect.Array;
-import java.text.Bidi;
 import java.util.Arrays;
 
-public class l003Queens {
+public class l003_2Queens {
     public static void main(String[] args) {
         // System.out.println(queenProblem(4, 3));
         System.out.println(nqueen());
