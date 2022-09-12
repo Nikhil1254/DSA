@@ -1,5 +1,6 @@
 import java.util.*;
 
+// without using leading zeros while addition and some slight changes
 public class l022_multiplyTwoListOptimized {
     public static Scanner scn = new Scanner(System.in);
 
