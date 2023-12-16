@@ -1,7 +1,7 @@
 // https://practice.geeksforgeeks.org/problems/predecessor-and-successor/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article
 
 
-// Using BST property we have done it , Time - O(log(n)) , space - O(1)
+// Using BST property we have done it , Time - O(log(n)) , space - O(1) , recursive space will be O(h)
 public class l041_PredecessorAndSuccessorInBST {
 
     static class Node {

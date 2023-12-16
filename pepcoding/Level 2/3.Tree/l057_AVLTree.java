@@ -10,6 +10,7 @@ public class l057_AVLTree {
         }
     }
 
+    // logn
     public static TreeNode addData(TreeNode root, int data) {
         if (root == null)
             return new TreeNode(data);
@@ -22,6 +23,7 @@ public class l057_AVLTree {
         return getRotation(root);
     }
 
+    // logn
     public static TreeNode removeData(TreeNode root, int data) {
         if (root == null)
             return null;
@@ -43,6 +45,7 @@ public class l057_AVLTree {
 
     }
 
+    // logn
     private static int getMin(TreeNode node) {
         while (node.left != null)
             node = node.left;
@@ -50,6 +53,7 @@ public class l057_AVLTree {
         return node.val;
     }
 
+    // o(1)
     private static void updateBalAndHeight(TreeNode root) {
         int lh = root.left != null ? root.left.height : -1;
         int rh = root.right != null ? root.right.height : -1;
@@ -60,6 +64,7 @@ public class l057_AVLTree {
         root.bal = bal;
     }
 
+    // O(1)
     private static TreeNode getRotation(TreeNode root) {
         updateBalAndHeight(root);
         if (root.bal == 2) { // ll,lr
@@ -82,7 +87,7 @@ public class l057_AVLTree {
         return root;
     }
 
-    // applied on LL case
+    // applied on LL case - O(1)
     private static TreeNode rightRotation(TreeNode A) {
         TreeNode B = A.left;
         TreeNode BKaRight = B.right;
@@ -96,7 +101,7 @@ public class l057_AVLTree {
         return B;
     }
 
-    // applied on RR case
+    // applied on RR case - O(1)
     private static TreeNode leftRotation(TreeNode A) {
         TreeNode B = A.right;
         TreeNode BKaLeft = B.left;
@@ -110,6 +115,7 @@ public class l057_AVLTree {
         return B;
     }
 
+    // O(n)
     public static void display(TreeNode node) {
         if (node == null)
             return;

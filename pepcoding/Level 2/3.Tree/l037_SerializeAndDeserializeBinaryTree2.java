@@ -5,6 +5,7 @@
 
 import java.util.LinkedList;
 
+// using level order solution
 public class l037_SerializeAndDeserializeBinaryTree2 {
     class TreeNode {
         int val;

@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.LinkedList;
 
 // https://www.pepcoding.com/resources/data-structures-and-algorithms-in-java-levelup/trees/bst-iterator/ojquestion
-// https://leetcode.com/problems/binary-search-tree-iterator/
+// https://leetcode.com/problems/binary-search-tree-iterator/   
 
 //using stack(extra space) 
 

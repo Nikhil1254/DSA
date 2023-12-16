@@ -3,10 +3,11 @@
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.LinkedList;
 
 // recursive solution - leetcode
 // iterative solution leetcode / gfg both I have done using queue
+
 public class l032_levelOrderOfBinaryTree {
 
     class TreeNode {
@@ -18,24 +19,32 @@ public class l032_levelOrderOfBinaryTree {
         }
     }
 
+    // iterative solution of level order traversal
     public List<List<Integer>> levelOrder(TreeNode root) {
-        ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
-        levelOrder(root, ans, 0);
-
-        return (List) ans;
-    }
-
-    private void levelOrder(TreeNode root, ArrayList<ArrayList<Integer>> ans, int level) {
+        List<List<Integer>> ans = new ArrayList<>();
         if (root == null)
-            return;
+            return ans;
 
-        if (ans.size() == level)
+        LinkedList<TreeNode> que = new LinkedList<>();
+        que.addLast(root);
+        int level = 0;
+
+        while (que.size() > 0) {
+            int size = que.size();
             ans.add(new ArrayList<>());
 
-        ans.get(level).add(root.val);
+            while (size-- > 0) {
+                TreeNode rn = que.removeFirst();
+                ans.get(level).add(rn.val);
+                if (rn.left != null)
+                    que.addLast(rn.left);
+                if (rn.right != null)
+                    que.addLast(rn.right);
+            }
 
-        levelOrder(root.left, ans, level + 1);
-        levelOrder(root.right, ans, level + 1);
+            level++;
+        }
 
+        return ans;
     }
 }

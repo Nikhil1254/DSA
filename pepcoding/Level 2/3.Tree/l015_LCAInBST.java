@@ -24,7 +24,7 @@ public class l015_LCAInBST {
             }
         }
         
-        return (lca!=null && find(lca,p) && find(lca,q)) ? lca : null ;
+        return (lca!=null && find(lca,p) && find(lca,q)) ? lca : null ; // 
     }
     
     public boolean find(TreeNode root,TreeNode tar){

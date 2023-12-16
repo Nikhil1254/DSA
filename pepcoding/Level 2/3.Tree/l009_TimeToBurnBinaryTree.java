@@ -1,90 +1,60 @@
 import java.util.*;
 
+// minimum time to burn Binary tree starting from target node
+// https://practice.geeksforgeeks.org/problems/burning-tree/1
+
 public class l009_TimeToBurnBinaryTree {
-    public static Scanner scn = new Scanner(System.in);
 
-    public static class TreeNode {
-        int val = 0;
-        TreeNode left = null;
-        TreeNode right = null;
+    class Node {
+        int data;
+        Node left;
+        Node right;
 
-        TreeNode(int val) {
-            this.val = val;
+        Node(int data) {
+            this.data = data;
+            left = null;
+            right = null;
         }
     }
 
-    static int max = -1;
-
-    public static int burningTree(TreeNode node, int fireNode) {
-        burningTreeHelper(node, fireNode);
-        return max;
+    public static int minTime(Node root, int target) {
+        int[] max = { -1 };
+        burningTree(root, target, max);
+        return max[0];
     }
 
-    public static int burningTreeHelper(TreeNode node, int tar) {
-        if (node == null)
+    private static int burningTree(Node root, int target, int[] max) {
+        if (root == null)
             return -1;
 
-        if (node.val == tar) {
-            burnNodes(node, null, 0); // function
+        if (root.data == target) {
+            burnNodes(root, null, 0, max);
             return 1;
         }
 
-        int left = burningTreeHelper(node.left, tar);
+        int left = burningTree(root.left, target, max);
         if (left != -1) {
-            burnNodes(node, node.left, left);
+            burnNodes(root, root.left, left, max);
             return left + 1;
         }
 
-        int right = burningTreeHelper(node.right, tar);
+        int right = burningTree(root.right, target, max);
         if (right != -1) {
-            burnNodes(node, node.right, right);
+            burnNodes(root, root.right, right, max);
             return right + 1;
         }
 
         return -1;
     }
 
-    public static void burnNodes(TreeNode node, TreeNode blockNode, int time) {
-        if (node == null || node == blockNode)
+    private static void burnNodes(Node root, Node blockNode, int time, int[] max) {
+        if (root == null || root == blockNode)
             return;
 
-        if (time > max)
-            max = time;
+        if (time > max[0])
+            max[0] = time;
 
-        burnNodes(node.left, blockNode, time + 1);
-        burnNodes(node.right, blockNode, time + 1);
-    }
-
-    // input_section=================================================
-
-    public static TreeNode createTree(int[] arr, int[] IDX) {
-        if (IDX[0] > arr.length || arr[IDX[0]] == -1) {
-            IDX[0]++;
-            return null;
-        }
-        TreeNode Treenode = new TreeNode(arr[IDX[0]++]);
-        Treenode.left = createTree(arr, IDX);
-        Treenode.right = createTree(arr, IDX);
-
-        return Treenode;
-    }
-
-    public static void solve() {
-        int n = scn.nextInt();
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++)
-            arr[i] = scn.nextInt();
-
-        int[] IDX = new int[1];
-        TreeNode root = createTree(arr, IDX);
-        int fireNode = scn.nextInt();
-
-        int ans = burningTree(root, fireNode);
-        System.out.println(ans);
-
-    }
-
-    public static void main(String[] args) {
-        solve();
+        burnNodes(root.left, blockNode, time + 1, max);
+        burnNodes(root.right, blockNode, time + 1, max);
     }
 }

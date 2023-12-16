@@ -26,7 +26,7 @@ public class l018_IsValidBST1 {
         while (curr != null) {
             TreeNode left = curr.left;
             if (left == null) {
-                // checking
+                // checking - inorder region
                 if (prev >= curr.val)
                     flag = false;
                 prev = curr.val;
@@ -35,11 +35,11 @@ public class l018_IsValidBST1 {
             } else {
                 TreeNode rightMostNode = getRightMostNode(left, curr);
                 if (rightMostNode.right == null) {
-                    // thread creation block
+                    // thread creation block , preorder region
                     rightMostNode.right = curr;
                     curr = curr.left;
                 } else {
-                    // thread destroy block
+                    // thread destroy block , inorder region
                     rightMostNode.right = null;
                     // checking
                     if (prev >= curr.val)
