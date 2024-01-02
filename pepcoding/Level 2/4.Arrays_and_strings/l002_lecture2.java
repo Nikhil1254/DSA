@@ -29,7 +29,7 @@ public class l002_lecture2 {
         return maxLen;
     }
 
-    // sir code -
+    // sir code - (it's generic template for all such kind of problems)
     public int lengthOfLongestSubstring1(String s) {
         if(s.length()<=1) return s.length();
         
@@ -47,13 +47,14 @@ public class l002_lecture2 {
         
         return len;
         /**
-         * first do "ei" work, the "si" work then len work.
+         * first do "ei" work, then "si" work if needed and then find length.
          * follow up question - give me longest string itself instead of length
          */
     }
 
 
     // question 2 - longest substring with at most K distinct characters - (leetcode 159 - at most 2 distinct characters)
+    // (leetcode 340 - longest substring with at most k distinct characters)
     // https://www.codingninjas.com/studio/problems/longest-substring-with-at-most-k-distinct-characters_2221410?leftPanelTabValue=PROBLEM
     public static int kDistinctChars(int k, String str) {
 		if(str.length()<=k)return str.length();

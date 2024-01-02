@@ -1,3 +1,5 @@
+import java.util.* ;
+
 public class l004_foldList {
     public static class ListNode {
         int val = 0;

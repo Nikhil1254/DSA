@@ -150,14 +150,14 @@ public class l008_mergeKSotedLists {
     }
 
     public static void main(String[] args) {
-        int n = scn.nextInt();
-        ListNode[] list = new ListNode[n];
-        for (int i = 0; i < n; i++) {
-            int m = scn.nextInt();
-            list[i] = createList(m);
-        }
+        // int n = scn.nextInt();
+        // ListNode[] list = new ListNode[n];
+        // for (int i = 0; i < n; i++) {
+        //     int m = scn.nextInt();
+        //     list[i] = createList(m);
+        // }
 
-        ListNode head = mergeKLists(list);
-        printList(head);
+        // ListNode head = mergeKLists(list);
+        // printList(head);
     }
 }
