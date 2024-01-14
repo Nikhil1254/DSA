@@ -1,9 +1,4 @@
 public class l001_lecture1 {
-    public static void main(String[] args) {
-        int[] arr = { 1,0,1,0,0,1,1,0,0 };
-        segregateZeroOnes(arr);
-        display(arr);
-    }
 
     // question1 - rotate an array by k times +ve means shift front elements to
     // back, -ve means

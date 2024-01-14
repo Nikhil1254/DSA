@@ -1,7 +1,4 @@
 public class l002_lecture2 {
-    public static void main(String[] args) {
-        
-    }
 
     // question 1 - longest substring without repeating characters(leetcode 3)
     // https://leetcode.com/problems/longest-substring-without-repeating-characters/
@@ -74,7 +71,7 @@ public class l002_lecture2 {
 		return len;
 	}
 
-    // question 3 - minimum window substring (leetcode 76);
+    //(###IMP) question 3 - minimum window substring (leetcode 76);
     // https://leetcode.com/problems/minimum-window-substring/
     public String minWindow(String s, String t) {
         int[] freq = new int[128];
@@ -83,7 +80,7 @@ public class l002_lecture2 {
             freq[t.charAt(idx)]++;
         
         int si = 0 , ei =0 , len = t.length() , ans = Integer.MAX_VALUE;
-        int gsi = -1, gei = -1 ;
+        int gsi = 0, gei = 0 ;
         
         while(ei<s.length()){
             if(freq[s.charAt(ei++)]-- > 0) len--;

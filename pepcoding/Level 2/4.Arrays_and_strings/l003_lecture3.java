@@ -20,7 +20,6 @@ public class l003_lecture3 {
         }
 
         int si = 0, ei = 0, ans = Integer.MAX_VALUE;
-        int gsi = -1, gei = -1;
 
         while (ei < s.length()) {
             if (freq[s.charAt(ei++)]-- > 0)

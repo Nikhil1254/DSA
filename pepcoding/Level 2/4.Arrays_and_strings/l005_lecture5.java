@@ -9,6 +9,11 @@ public class l005_lecture5 {
 
     // question 1 => leetcode 239 - sliding window maximum -
     // https://leetcode.com/problems/sliding-window-maximum/
+    /**
+     * pq.peek() - O(1)
+     * pq.remove() - log(n)
+     * pq.add() - log(n)
+     */
 
     // sol1 - using priorityQueue/heap => time complexity worst case -> nlogn
     public int[] maxSlidingWindow(int[] nums, int k) {
@@ -38,7 +43,7 @@ public class l005_lecture5 {
         int n = nums.length, idx = 0;
         int[] ans = new int[n - k + 1];
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++) { // n
             while (deque.size() != 0 && deque.getFirst() <= i - k)
                 deque.removeFirst();
 

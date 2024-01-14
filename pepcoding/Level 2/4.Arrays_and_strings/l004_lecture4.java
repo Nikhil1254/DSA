@@ -116,10 +116,10 @@ public class l004_lecture4 {
     // https://leetcode.com/problems/subarray-sums-divisible-by-k/
     /**
      * we have 2 follow up questions on this -
-     * 1. we need to have arrayList for each index and need to store all indices ,
+     * 1. get all subarrays.=> we need to have arrayList for each index and need to store all indices ,
      * for rem==0 first value will be -1
      * 2. len of longest subarray divisible by k => we just need to store firstIndex
-     * and calculate len when next idx comes
+     * and calculate len when next idx comes, cause with first index only it will make largest length
      */
 
     // get count - using array to implement
@@ -142,7 +142,7 @@ public class l004_lecture4 {
     public int longestSubarraysDivByK(int[] nums, int k) {
         int n = nums.length;
         int[] freq = new int[(int) (1e4 + 1)];
-        Arrays.fill(freq, -1);
+        Arrays.fill(freq, -2);
         freq[0] = -1; // to handle rem==0 case
         int sum = 0, ei = 0, len = 0;
 
@@ -197,7 +197,7 @@ public class l004_lecture4 {
         return len;
     }
 
-    // question 6 - subarrays with qual ones and zeros
+    // (IMP)question 6 - subarrays with equal ones and zeros
     // replace 0 by -1 and then same logic as last question(we can use either hm or
     // array to solve)
     // https://www.geeksforgeeks.org/problems/count-subarrays-with-equal-number-of-1s-and-0s-1587115620/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=bottom_sticky_on_article
@@ -218,7 +218,7 @@ public class l004_lecture4 {
 
     // question 7 - leetcode 525 (followup for last question)
     // https://leetcode.com/problems/contiguous-array/
-    // using kadans algo we are solving it
+    // using hashmap
     public int findMaxLength_map(int[] arr) {
         HashMap<Integer, Integer> hm = new HashMap<>();
         hm.put(0, -1);
@@ -235,6 +235,7 @@ public class l004_lecture4 {
         return len;
     }
 
+    // using array
     public int findMaxLength_array(int[] arr) {
         int k = (int) (1e5 + 1);
         int[] rem = new int[k];
